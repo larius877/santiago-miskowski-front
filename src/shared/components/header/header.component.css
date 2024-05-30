@@ -1,0 +1,46 @@
+/* Estilos para el header */
+header {
+  background-color: #333; /* Color de fondo del encabezado */
+  color: #fff; /* Color del texto */
+  padding: 20px 0; /* Espaciado interno superior e inferior */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between; /* Alineación de los elementos alrededor */
+  align-items: center; /* Alineación vertical al centro */
+  max-width: 1200px; /* Ancho máximo del contenido */
+  margin: 0 auto; /* Centrar horizontalmente */
+}
+
+.logo img {
+  max-width: 100px; /* Tamaño máximo del logo */
+}
+
+.menu {
+  list-style-type: none; /* Quita los estilos de la lista */
+  padding: 0; /* Quita el relleno */
+  margin: 0; /* Quita el margen */
+}
+
+.menu li {
+  display: inline-block; /* Muestra los elementos en línea */
+  margin-right: 20px; /* Espacio entre elementos */
+}
+
+.menu li:last-child {
+  margin-right: 0; /* Quita el margen derecho del último elemento */
+}
+
+.menu li a {
+  color: #fff; /* Color del texto de los enlaces */
+  text-decoration: none; /* Quita el subrayado de los enlaces */
+  font-size: 16px; /* Tamaño de fuente */
+  transition: color 0.3s; /* Transición suave para el cambio de color */
+}
+
+.menu li a:hover {
+  color: #ffd700; /* Cambia el color al pasar el mouse */
+}
