@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogService } from 'primeng/dynamicdialog';
 import { PrimeNGConfig } from 'primeng/api';
+import { CarService } from 'src/core/services/car.service';
+import { addCar, removeCar } from 'src/app/store/actions/car.actions';
+import { selectAllCars } from 'src/app/store/selectors/car.selectors';
+import { Store, select } from '@ngrx/store';
+import { Car } from 'src/core/models/car.model';
 
 @Component({
   selector: 'app-crud',
@@ -8,59 +12,83 @@ import { PrimeNGConfig } from 'primeng/api';
   styleUrls: ['./crud.component.css']
 })
 export class CrudComponent implements OnInit {
-  users: any[] = []; // Array de usuarios
-  displayDialog: boolean = false; // Controla la visibilidad del diálogo
-  selectedUser: any = {}; // Usuario seleccionado para agregar/editar
+  cars: Car[] = [];
+  displayDialog: boolean = false;
+  selectedCar: Car = {id: -1, model: '', brand: ''};
+  filteredBrand: string = "";
 
-  constructor(private primengConfig: PrimeNGConfig, public dialogService: DialogService) {}
+  constructor(
+    private carService: CarService,
+    private primengConfig?: PrimeNGConfig, 
+    private store?: Store<{ cars: Car[] }>) {}
 
   ngOnInit() {
-    // Inicializa PrimeNG
-    this.primengConfig.ripple = true;
-
-    // Puedes inicializar aquí tus datos de usuarios
-    this.users = [
-      { name: 'Usuario 1', email: 'usuario1@example.com' },
-      { name: 'Usuario 2', email: 'usuario2@example.com' },
-    ];
+    this.primengConfig!.ripple = true;
+    this.getCars();
   }
 
-  // Muestra el diálogo para agregar un nuevo usuario
-  showDialogToAdd() {
-    this.selectedUser = {};
+  getCars() {
+    this.carService.getAll().subscribe(res => {
+      this.cars = res;
+      res.forEach(element => {
+        this.store!.dispatch(addCar({ car: element }));
+      });
+      this.store!.pipe(select(selectAllCars)).subscribe(res => {
+        console.log('Cars from store => ', res);
+      });
+    });
+  }
+
+  showOrHideDialog(show: boolean) {
+    this.selectedCar = {id: -1, model: '', brand: ''};
+    this.displayDialog = show;
+  }
+
+  showDialogToEdit(car: Car) {
+    this.selectedCar = { ...car };
     this.displayDialog = true;
   }
 
-  // Muestra el diálogo para editar un usuario existente
-  showDialogToEdit(user: any) {
-    this.selectedUser = { ...user };
-    this.displayDialog = true;
-  }
-
-  // Guarda el usuario (agregar o editar)
-  saveUser() {
-    if (!this.selectedUser.id) {
-      // Si el usuario no tiene ID, es un nuevo usuario (agregar)
-      this.users.push(this.selectedUser);
+  saveCar() {
+    if (this.selectedCar.id === -1) {
+      this.carService.create({
+        brand: this.selectedCar.brand,
+        model: this.selectedCar.model
+      }).subscribe(res => {
+        if(res) {
+          this.getCars();
+        }
+      })
     } else {
-      // Si el usuario tiene ID, es un usuario existente (editar)
-      const index = this.users.findIndex(user => user.id === this.selectedUser.id);
-      this.users[index] = { ...this.selectedUser };
+      const index = this.cars.findIndex(car => car.id === this.selectedCar.id);
+      this.cars[index] = { ...this.selectedCar };
+      this.carService.edit({
+        id: this.selectedCar.id,
+        model: this.selectedCar.model,
+        brand: this.selectedCar.brand
+      }).subscribe(res => {
+        if(res) {
+          this.getCars();
+        }
+      })
     }
-    this.hideDialog();
+    this.showOrHideDialog(false);
   }
 
-  // Oculta el diálogo
-  hideDialog() {
-    this.displayDialog = false;
-    this.selectedUser = {};
+  onPageChange(evt: any) {
+
   }
 
-  // Elimina un usuario
-  deleteUser(user: any) {
-    const index = this.users.findIndex(u => u.id === user.id);
-    if (index !== -1) {
-      this.users.splice(index, 1);
+  deleteCar(id: number) {
+   this.carService.delete(id).subscribe(res => {
+    if(res) {
+      this.store!.dispatch(removeCar({id: id.toString()}));
+      this.getCars();
     }
+   });
+  }
+
+  get carsFiltered() {
+    return this.cars.filter(car => car.brand.toLowerCase().includes(this.filteredBrand.toLowerCase()));
   }
 }

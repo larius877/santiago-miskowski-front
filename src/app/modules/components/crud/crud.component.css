@@ -1,7 +1,26 @@
 .container {
-    margin: 20px;
-  }
-  
-  .p-field {
-    margin-bottom: 1em;
-  }
+  margin: 20px;
+  min-height: 75vh;
+}
+
+button {
+  margin: 2px;
+}
+
+.p-field {
+  margin-bottom: 1em;
+}
+
+.container {
+  min-height: '100vh';
+}
+
+p-table {
+  width: 80% !important;
+  display:block;
+} 
+
+p-paginator {
+  width: 80% !important;
+  display:block;
+} 

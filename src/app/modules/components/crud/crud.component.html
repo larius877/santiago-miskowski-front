@@ -1,46 +1,46 @@
 <div class="container">
-    <h2>Lista de Usuarios</h2>
-    
-    <!-- Botón para agregar un nuevo usuario -->
-    <button pButton icon="pi pi-plus" label="Agregar" (click)="showDialogToAdd()"></button>
-    
-    <!-- Tabla de datos -->
-    <p-table [value]="users" [paginator]="true" [rows]="10">
-      <ng-template pTemplate="header">
-        <tr>
-          <th>Nombre</th>
-          <th>Email</th>
-          <th>Acciones</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-user>
-        <tr>
-          <td>{{user.name}}</td>
-          <td>{{user.email}}</td>
-          <td>
-            <!-- Botones de acciones -->
-            <button pButton icon="pi pi-pencil" label="Editar" (click)="showDialogToEdit(user)"></button>
-            <button pButton icon="pi pi-trash" label="Eliminar" (click)="deleteUser(user)"></button>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
-    
-    <!-- Diálogo para agregar/editar usuarios -->
-    <p-dialog header="Agregar/Editar Usuario" [(visible)]="displayDialog" [modal]="true">
-      <div class="p-fluid">
-        <div class="p-field">
-          <label for="name">Nombre</label>
-          <input id="name" type="text" pInputText [(ngModel)]="selectedUser.name" />
-        </div>
-        <div class="p-field">
-          <label for="email">Email</label>
-          <input id="email" type="email" pInputText [(ngModel)]="selectedUser.email" />
-        </div>
-      </div>
-      <div class="p-dialog-footer">
-        <button pButton type="button" label="Guardar" icon="pi pi-check" (click)="saveUser()"></button>
-        <button pButton type="button" label="Cancelar" icon="pi pi-times" (click)="hideDialog()"></button>
-      </div>
-    </p-dialog>
-  </div>
+  <h2>ABMC Autos</h2>
+  <span class="p-input-icon-left">
+    <i class="pi pi-search"></i>
+    <input type="text" pInputText [(ngModel)]="filteredBrand" placeholder="Filtrar por marca">
+  </span>
+  <span>
+    <button pButton type="button" label="Registrar auto" (click)="showOrHideDialog(true)"></button>
+  </span>
+  <p-table [value]="carsFiltered" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 30]">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-car>
+      <tr>
+        <td>{{ car.brand }}</td>
+        <td>{{ car.model }}</td>
+        <td>
+          <button pButton type="button" label="Editar" icon="pi pi-pencil" (click)="showDialogToEdit(car)"></button>
+          <button pButton type="button" label="Eliminar" icon="pi pi-trash" (click)="deleteCar(car.id)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+
+  <p-dialog
+    header="{{ (selectedCar && selectedCar.id !== undefined && selectedCar.id > 0) ? 'Editar auto' : 'Registrar auto' }}"
+    [(visible)]="displayDialog" [modal]="true">
+    <div class="p-field">
+      <label for="brand">Marca: </label>
+      <input type="text" id="brand" pInputText [(ngModel)]="selectedCar.brand">
+    </div>
+    <div class="p-field">
+      <label for="model">Modelo: </label>
+      <input type="model" id="model" pInputText [(ngModel)]="selectedCar.model">
+    </div>
+    <button pButton type="button" label="Guardar" icon="pi pi-check" class="p-button-success"
+      (click)="saveCar()"></button>
+    <button pButton type="button" label="Cancelar" icon="pi pi-times" (click)="showOrHideDialog(false)"></button>
+  </p-dialog>
+</div>
