@@ -7,7 +7,7 @@ import { SharedModule } from 'src/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
-import { CrudModule } from './modules/components/crud/crud.module';
+import { CrudModule } from './modules/crud/crud.module';
 
 @NgModule({
   declarations: [

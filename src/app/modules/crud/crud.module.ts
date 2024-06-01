@@ -8,11 +8,11 @@ import { ButtonModule } from 'primeng/button'; // Importa ButtonModule
 import { DialogService } from 'primeng/dynamicdialog'; // Agrega DialogService
 
 import { CrudRoutingModule } from './crud-routing.module';
-import { CrudComponent } from './crud.component';
 import { CarService } from 'src/core/services/car.service';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from 'src/app/store/reducers/car.reducer';
 import { PaginatorModule } from 'primeng/paginator';
+import { CrudComponent } from './components/crud.component';
 
 @NgModule({
   declarations: [CrudComponent],
