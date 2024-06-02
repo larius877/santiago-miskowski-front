@@ -2,7 +2,7 @@
   <h2>ABMC Autos</h2>
   <span class="p-input-icon-left">
     <i class="pi pi-search"></i>
-    <input type="text" pInputText [(ngModel)]="filteredBrand" placeholder="Filtrar por marca">
+    <input type="text" pInputText [formControl]="txFilteredBrand" placeholder="Filtrar por marca">
   </span>
   <span>
     <button pButton type="button" label="Registrar auto" (click)="showOrHideDialog(true)"></button>
@@ -33,11 +33,13 @@
     [(visible)]="displayDialog" [modal]="true">
     <div class="p-field">
       <label for="brand">Marca: </label>
-      <input type="text" id="brand" pInputText [(ngModel)]="selectedCar.brand">
+      <input type="text" id="brand" aria-describedby="brand-help" pInputText [formControl]="txBrand">
+      <small *ngIf="txBrand.invalid" id="brand-help" class="p-invalid">Debe ingresar una marca</small>
     </div>
     <div class="p-field">
       <label for="model">Modelo: </label>
-      <input type="model" id="model" pInputText [(ngModel)]="selectedCar.model">
+      <input type="model" id="model" aria-describedby="model-help" pInputText [formControl]="txModel">      
+      <small *ngIf="txModel.invalid" id="model-help" class="p-invalid">Debe ingresar un modelo</small>
     </div>
     <button pButton type="button" label="Guardar" icon="pi pi-check" class="p-button-success"
       (click)="saveCar()"></button>

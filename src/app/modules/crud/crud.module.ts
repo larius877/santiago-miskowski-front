@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ColumnFilter, TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
@@ -25,6 +25,7 @@ import { CrudComponent } from './components/crud.component';
     InputTextModule,
     ButtonModule,
     PaginatorModule,
+    ReactiveFormsModule,
     StoreModule.forFeature('cars', reducer),
   ],
   providers: [DialogService, CarService],
