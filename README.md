@@ -6,7 +6,8 @@ run `npm install -g @angular/cli@14` to install the Angular CLI. After, run `npm
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `npm test` for running jest testing suite
 
 
 ## Further help
