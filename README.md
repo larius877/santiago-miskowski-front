@@ -1,6 +1,7 @@
 # Angular 14 DEMO coded for Evoltis 2024 challenge
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.13 and uses Node.js v18.17.0.
+
 run `npm install -g @angular/cli@14` to install the Angular CLI. After, run `npm i` at the same level of package.json(in project root) to install dependencies
 
 
