@@ -1,13 +1,13 @@
 <div class="container">
   <h2>ABMC Autos</h2>
-  <span class="p-input-icon-left">
+  <span class="p-input-icon-left pr-20">
     <i class="pi pi-search"></i>
     <input type="text" pInputText [formControl]="txFilteredBrand" placeholder="Filtrar por marca">
   </span>
   <span>
     <button pButton type="button" label="Registrar auto" (click)="showOrHideDialog(true)"></button>
   </span>
-  <p-table [value]="carsFiltered" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 30]">
+  <p-table [value]="carsFiltered" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 30]" class="pt-20">
     <ng-template pTemplate="header">
       <tr>
         <th>Marca</th>

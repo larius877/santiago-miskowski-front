@@ -23,4 +23,12 @@ p-table {
 p-paginator {
   width: 80% !important;
   display:block;
-} 
+}
+
+.pt-20 {
+  padding-top: 20px;
+}
+
+.pr-20 {
+  padding-right: 20px;
+}
