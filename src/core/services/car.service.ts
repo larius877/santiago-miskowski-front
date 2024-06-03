@@ -15,22 +15,22 @@ export class CarService {
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<Car[]> {
-    return this.http.get<Car[]>(this.apiUrl + this.controller);
+    return this.http.get<Car[]>(`${this.apiUrl}${this.controller}`);
   }
 
   create(car: Car): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + this.controller, car);
+    return this.http.post<boolean>(`${this.apiUrl}${this.controller}`, car);
   }
 
   edit(car: Car): Observable<boolean> {
-    return this.http.patch<boolean>(this.apiUrl + this.controller, car);
+    return this.http.patch<boolean>(`${this.apiUrl}${this.controller}`, car);
   }
 
   delete(id: number): Observable<boolean> {
-    return this.http.delete<boolean>(this.apiUrl + this.controller + '/' + id.toString());
+    return this.http.delete<boolean>(`${this.apiUrl}${this.controller}/${id}`);
   }
 
   get(id: number): Observable<Car[]> {
-    return this.http.get<Car[]>(this.apiUrl + this.controller + '/' + id.toString());
+    return this.http.get<Car[]>(`${this.apiUrl}${this.controller}/${id}`);
   }
 }

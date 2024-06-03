@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ColumnFilter, TableModule } from 'primeng/table';
+import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button'; // Importa ButtonModule
-import { DialogService } from 'primeng/dynamicdialog'; // Agrega DialogService
-
+import { ButtonModule } from 'primeng/button';
+import { DialogService } from 'primeng/dynamicdialog';
 import { CrudRoutingModule } from './crud-routing.module';
 import { CarService } from 'src/core/services/car.service';
 import { StoreModule } from '@ngrx/store';
